@@ -73,9 +73,10 @@ let update msg model =
     | _, PostcodeChanged p ->
         { model with
             Postcode = p
-            (* Task 2.2 Validation. Use the Validation.isValidPostcode function to implement client-side form validation.
-               Note that the validation is the same shared code that runs on the server! *)
-            ValidationError = None }, Cmd.none
+            ValidationError =
+            if Validation.isValidPostcode p
+            then None
+            else Some <| sprintf "\"%s\" is not a valid postcode" p }, Cmd.none
     | _, ErrorMsg e ->
         { model with ServerState = ServerError e.Message }, Cmd.none
 
