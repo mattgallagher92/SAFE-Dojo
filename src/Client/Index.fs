@@ -118,9 +118,8 @@ module ViewParts =
         let latLong = LatLngExpression.Case3(lr.Location.LatLong.Latitude, lr.Location.LatLong.Longitude)
         basicTile "Map" [ Tile.Size Tile.Is12 ] [
             map [
-                (* Task 3.3 MAP: Update the Zoom to 15. *)
                 MapProps.Center latLong
-                MapProps.Zoom 11.
+                MapProps.Zoom 15.0
                 MapProps.Style [ Height 500 ]
             ] [
                 tileLayer [ TileLayerProps.Url "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" ] []
