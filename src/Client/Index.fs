@@ -123,7 +123,7 @@ module ViewParts =
                 MapProps.Style [ Height 500 ]
             ] [
                 tileLayer [ TileLayerProps.Url "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" ] []
-                (* Task 3.4 MAP: Create a marker for the map. Use the makeMarker function above. *)
+                makeMarker latLong <| sprintf "%s - %s" lr.Postcode lr.Location.Region
             ]
         ]
 
