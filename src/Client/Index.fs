@@ -118,8 +118,8 @@ module ViewParts =
         let latLong = LatLngExpression.Case3(lr.Location.LatLong.Latitude, lr.Location.LatLong.Longitude)
         basicTile "Map" [ Tile.Size Tile.Is12 ] [
             map [
-                (* Task 3.2 MAP: Set the center of the map using MapProps.Center, supply the lat/long value as input.
-                   Task 3.3 MAP: Update the Zoom to 15. *)
+                (* Task 3.3 MAP: Update the Zoom to 15. *)
+                MapProps.Center latLong
                 MapProps.Zoom 11.
                 MapProps.Style [ Height 500 ]
             ] [
@@ -230,9 +230,7 @@ let view (model:Model) dispatch =
                     Tile.Size Tile.Is12
                 ] [
                     Tile.parent [ Tile.Size Tile.Is12 ] [
-                        (* Task 3.1 MAP: Call the mapTile function here, which creates a
-                           tile to display a map using the React Leaflet component. The function
-                           takes in a LocationResponse value as input and returns a ReactElement. *)
+                        mapTile report.Location
                     ]
                 ]
                 Tile.ancestor [ ] [
