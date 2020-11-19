@@ -37,11 +37,9 @@ let private asWeatherResponse (weather:DataAccess.Weather.MetaWeatherLocation.Ro
       AverageTemperature = weather.ConsolidatedWeather |> Array.averageBy(fun r -> float r.TheTemp) }
 
 let getWeather postcode = async {
-    (* Task 4.1 WEATHER: Implement a function that retrieves the weather for
-       the given postcode. Use the GeoLocation.getLocation, Weather.getWeatherForPosition and
-       asWeatherResponse functions to create and return a WeatherResponse instead of the stub.
-       Don't forget to use let! instead of let to "await" the Task. *)
-    return! async.Return { WeatherType = WeatherType.Clear; AverageTemperature = 0. }
+    let! location = getLocation postcode
+    let! weather = getWeatherForPosition location.LatLong
+    return weather |> asWeatherResponse
 }
 
 let dojoApi =
