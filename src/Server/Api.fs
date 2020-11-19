@@ -45,6 +45,4 @@ let getWeather postcode = async {
 let dojoApi =
     { GetDistance = getDistanceFromLondon
       GetCrimes = getCrimeReport
-
-      (* Task 4.2 WEATHER: Hook up the weather endpoint to the getWeather function. *)
-    }
+      GetWeather = getWeather }
