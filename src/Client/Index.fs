@@ -139,9 +139,9 @@ module ViewParts =
                         ]
                         Level.title [ ] [
                             Heading.h3 [ Heading.Is4; Heading.Props [ Style [ Width "100%" ] ] ] [
-                                (* Task 4.7 WEATHER: Get the temperature from the given weather report
-                                   and display it here instead of an empty string. *)
-                                str ""
+                                int weatherReport.AverageTemperature
+                                |> sprintf "%d°"
+                                |> str
                             ]
                         ]
                     ]
