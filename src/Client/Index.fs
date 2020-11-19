@@ -16,7 +16,8 @@ open Shared
 /// The different elements of the completed report.
 type Report =
     { Location : LocationResponse
-      Crimes : CrimeResponse array }
+      Crimes : CrimeResponse array
+      Weather : WeatherResponse }
 
 type ServerState = Idle | Loading | ServerError of string
 
@@ -49,13 +50,12 @@ let dojoApi =
 let getResponse postcode = async {
     let! location = dojoApi.GetDistance postcode
     let! crimes = dojoApi.GetCrimes postcode
-    (* Task 4.4 WEATHER: Fetch the weather from the API endpoint you created.
-       Then, save its value into the Report below. You'll need to add a new
-       field to the Report type first, though! *)
+    let! weather = dojoApi.GetWeather postcode
 
     return
         { Location = location
-          Crimes = crimes }
+          Crimes = crimes
+          Weather = weather }
 }
 
 /// The update function knows how to update the model given a message.
