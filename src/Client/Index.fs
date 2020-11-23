@@ -34,6 +34,7 @@ type Msg =
     | PostcodeChanged of string
     | GotReport of Report
     | ErrorMsg of exn
+    | Clear
 
 /// The init function is called to start the message pump with an initial view.
 let init () =
@@ -79,6 +80,7 @@ let update msg model =
             else Some <| sprintf "\"%s\" is not a valid postcode" p }, Cmd.none
     | _, ErrorMsg e ->
         { model with ServerState = ServerError e.Message }, Cmd.none
+    | model, Clear -> init ()
 
 [<AutoOpen>]
 module ViewParts =
@@ -209,6 +211,11 @@ let view (model:Model) dispatch =
                                 Button.Disabled (model.ValidationError.IsSome)
                                 Button.IsLoading (model.ServerState = ServerState.Loading)
                             ] [ str "Submit" ]
+                            Button.button [
+                                Button.IsFullWidth
+                                Button.OnClick (fun _ -> dispatch Clear)
+                                Button.IsLoading (model.ServerState = ServerState.Loading)
+                            ] [ str "Clear" ]
                         ]
                     ]
                 ]
